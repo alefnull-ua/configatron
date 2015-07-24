@@ -261,7 +261,7 @@ class Configatron
         return cloned[obj.object_id]
       else
         begin
-          cl = obj.clone
+          cl = obj.dup
         rescue Exception
           # unclonnable (TrueClass, Fixnum, ...)
           cloned[obj.object_id] = obj
@@ -270,7 +270,7 @@ class Configatron
           cloned[obj.object_id] = cl
           cloned[cl.object_id] = cl
           if cl.is_a?( Hash )
-            cl.clone.each { |k,v|
+            cl.dup.each { |k,v|
               cl[k] = deep_clone( v, cloned )
             }
           elsif cl.is_a?( Array )
